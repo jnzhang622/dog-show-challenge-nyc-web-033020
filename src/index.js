@@ -1,20 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
     const url = 'http://localhost:3000/dogs'
     const dogForm = document.getElementById('dog-form')
-    const table = document.getElementById('table-body')
 
     fetch(url)
     .then (resp => resp.json())
     .then(dogs => dogs.forEach(getDog))
     
     function getDog(dog){
-        table.innerHTML += `<tr dogId=${dog.id}><td>${dog.name}</td> <td>${dog.breed}</td> <td>${dog.sex}</td> <td><button class='editBtn' dogId=${dog.id}> Edit</button></td></tr>`
+        document.getElementById('table-body').innerHTML += 
+        `<tr dog-id=${dog.id}><td>${dog.name}</td> <td>${dog.breed}</td> <td>${dog.sex}</td> <td><button class='editBtn' dog-id=${dog.id}> Edit</button></td></tr>`
     }
 
     document.addEventListener('click', function(e){
         e.preventDefault()
         if (e.target.class === 'editBtn'){
-            console.log(e.target.dogId)
             editDog(e.target.dataset.id)
         }
         else if (e.target.type === 'submit'){
@@ -34,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function editedDog(e){
-        
+        // fetch(`${url}`/${})
     }
 
 
