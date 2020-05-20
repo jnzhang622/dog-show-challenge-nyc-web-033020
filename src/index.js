@@ -8,15 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(dogs => dogs.forEach(getDog))
     
     function getDog(dog){
-        table.innerHTML += `<tr dog-id=${dog.id}><td>${dog.name}</td> <td>${dog.breed}</td> <td>${dog.sex}</td> <td><button class='editBtn' dog-id=${dog.id}> Edit</button></td></tr>`
+        table.innerHTML += `<tr dogId=${dog.id}><td>${dog.name}</td> <td>${dog.breed}</td> <td>${dog.sex}</td> <td><button class='editBtn' dogId=${dog.id}> Edit</button></td></tr>`
     }
 
     document.addEventListener('click', function(e){
         e.preventDefault()
         if (e.target.class === 'editBtn'){
-            console.log(e.target.class)
+            console.log(e.target.dogId)
             editDog(e.target.dataset.id)
-
+        }
+        else if (e.target.type === 'submit'){
+            editedDog(e)
         }
     })
 
@@ -29,6 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
             dogForm.sex.value = dog.sex
             dogForm.dataset.id = dog.id
         })
+    }
+
+    function editedDog(e){
+        
     }
 
 
