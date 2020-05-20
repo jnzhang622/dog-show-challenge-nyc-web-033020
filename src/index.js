@@ -8,17 +8,27 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(dogs => dogs.forEach(getDog))
     
     function getDog(dog){
-        table.innerHTML += `<tr><td>${dog.name}</td> <td>${dog.breed}</td> <td>${dog.sex}</td> <td><button class='edit'> Edit</button></td></tr>`
+        table.innerHTML += `<tr dog-id=${dog.id}><td>${dog.name}</td> <td>${dog.breed}</td> <td>${dog.sex}</td> <td><button class='editBtn' dog-id=${dog.id}> Edit</button></td></tr>`
     }
 
     document.addEventListener('click', function(e){
-        if (e.target.class == 'edit'){
+        e.preventDefault()
+        if (e.target.class === 'editBtn'){
+            console.log(e.target.class)
+            editDog(e.target.dataset.id)
 
         }
     })
 
     function editDog(id){
-        
+        fetch(`${url}/${id}`)
+        .then(resp => resp.json())
+        .then(dog => {
+            dogForm.name.value = dog.name
+            dogForm.breed.value = dog.breed
+            dogForm.sex.value = dog.sex
+            dogForm.dataset.id = dog.id
+        })
     }
 
 
