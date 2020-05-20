@@ -1,11 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
-const dogForm = document.querySelector('dog-form')
+    const url = 'http://localhost:3000/dogs'
+    const dogForm = document.getElementById('dog-form')
+    const table = document.getElementById('table-body')
 
-    function getDogs(){ 
-        return fetch('http://localhost:3000/dogs')
-        .then (resp => resp.json())
+    fetch(url)
+    .then (resp => resp.json())
+    .then(dogs => dogs.forEach(getDog))
+    
+    function getDog(dog){
+        table.innerHTML += `<tr><td>${dog.name}</td> <td>${dog.breed}</td> <td>${dog.sex}</td> <td><button class='edit'> Edit</button></td></tr>`
+    }
 
+    document.addEventListener('click', function(e){
+        if (e.target.class == 'edit'){
+
+        }
+    })
+
+    function editDog(id){
+        
     }
 
 
-})
+
+    })
